@@ -14,7 +14,12 @@ export const sendOtp = async (req: Request, res: Response) => {
 
     const code = await otpService.sendOtp(phoneNumber);
     await logOtpEvent({ phone: phoneNumber, event: 'sent' });
-    res.status(200).json({ message: `OTP sent via ${channel}`, code }); // ⚠️ Quitar el código en producción
+    res
+      .status(200)
+      .json({
+        message: `OTP sent via ${channel}`,
+        code: process.env.NODE_ENV === 'test' ? code : undefined,
+      });
   } catch (err: any) {
     res.status(500).json({ error: err.message });
   }

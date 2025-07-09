@@ -1,10 +1,10 @@
 import { getFirestore } from 'firebase-admin/firestore';
 import { otpConfig } from '../config/otpConfig';
-import { firestore } from "../config/firebase";
+import { firestore } from '../config/firebase';
 
 const db = getFirestore();
 // const otpCollection = db.collection('otp_requests');
-const otpCollection = firestore.collection("otp_requests");
+const otpCollection = firestore.collection('otp_requests');
 
 export async function saveOtpCode(phone: string, code: string): Promise<void> {
   const now = new Date();
@@ -39,6 +39,15 @@ export async function verifyOtpCode(phone: string, inputCode: string) {
     return { success: false, message: 'Código incorrecto' };
   }
 
-  await otpCollection.doc(phone).delete(); // ⚠️ elimina el OTP usado
+  await otpCollection.doc(phone).delete();
   return { success: true };
+}
+
+export async function deleteOtpCode(phone: string): Promise<void> {
+  await otpCollection.doc(phone).delete();
+}
+
+export async function getLastOtpByPhone(phone: string) {
+  const doc = await otpCollection.doc(phone).get();
+  return doc.exists ? doc.data() : null;
 }

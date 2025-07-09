@@ -1,0 +1,42 @@
+{
+  "name": "otp-auth-service",
+  "version": "1.0.0",
+  "description": "Servicio de autenticación OTP creado por Nolberto para MotoCuy, usando Node.js, TypeScript y arquitectura limpia. Envío de códigos por SMS o WhatsApp con validación segura y extensible.",
+  "main": "dist/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts",
+    "dev:nodemon": "nodemon",
+    "build": "tsc",
+    "start": "node dist/server.js",
+    "start:prod": "npm run build && npm run start"
+  },
+  "keywords": [
+    "otp",
+    "typescript",
+    "express",
+    "firebase",
+    "sms",
+    "whatsapp",
+    "motocuy"
+  ],
+  "author": "Nolberto",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "dotenv": "^17.1.0",
+    "express": "^5.1.0",
+    "express-rate-limit": "^7.5.1",
+    "firebase-admin": "^13.4.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "twilio": "^5.7.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.3",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/node": "^24.0.12",
+    "nodemon": "^3.1.10",
+    "ts-node": "^10.9.2"
+  }
+}
